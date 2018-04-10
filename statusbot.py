@@ -35,6 +35,10 @@ class EntropiaStatus(object):
         last_change = self.spaceapi['state']['lastchange']
         return datetime.datetime.fromtimestamp(last_change)
 
+    def has_changed(self):
+        seconds_since_change = (datetime.datetime.now() - self.last_change).total_seconds()
+        return seconds_since_change < 10
+
 
 def main():
     global update_id
