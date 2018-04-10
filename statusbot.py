@@ -22,6 +22,7 @@ class EntropiaStatus(object):
         self.spaceapi_url = SPACEAPI_URL
         self.spaceapi = self.entropia_spaceapi()
         self.open = self.is_club_open()
+        self.last_change = self.last_change()
 
     def entropia_spaceapi(self):
         spaceapi = requests.get(self.spaceapi_url)
@@ -29,6 +30,10 @@ class EntropiaStatus(object):
 
     def is_club_open(self):
         return self.spaceapi['open']
+
+    def last_change(self):
+        last_change = self.spaceapi['state']['lastchange']
+        return datetime.datetime.fromtimestamp(last_change)
 
 
 def main():
