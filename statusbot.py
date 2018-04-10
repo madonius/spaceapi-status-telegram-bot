@@ -19,29 +19,32 @@ update_id = None
 
 class EntropiaStatus(object):
     def __init__(self):
-        self.spaceapi_url = SPACEAPI_URL
-        self.spaceapi = self.__entropia_spaceapi__()
-        self.open = self.__is_club_open__()
-        self.last_change = self.__get_last_change__()
+        self._spaceapi_url = SPACEAPI_URL
+        self._spaceapi = self.spaceapi
+        self._open = self.open
+        self._last_change = self.last_change
 
-    def __entropia_spaceapi__(self):
-        spaceapi = requests.get(self.spaceapi_url)
+    @property
+    def spaceapi(self):
+        spaceapi = requests.get(self._spaceapi_url)
         return spaceapi.json()
 
-    def __is_club_open__(self):
-        return self.spaceapi['open']
+    @property
+    def open(self):
+        return self._spaceapi['open']
 
-    def __get_last_change__(self):
-        last_change = self.spaceapi['state']['lastchange']
+    @property
+    def last_change(self):
+        last_change = self._spaceapi['state']['lastchange']
         return datetime.datetime.fromtimestamp(last_change)
 
     @property
-    def has_changed(self, timestamp=None):
+    def changed(self, timestamp=None):
         # TODO: Status change detection should be done properly…
         if not timestamp:
             timestamp = datetime.datetime.now()
-        seconds_since_change = (timestamp - self.last_change).total_seconds()
-        return seconds_since_change < 10
+        seconds_since_change = (timestamp - self._last_change).total_seconds()
+        return seconds_since_change < 10.0
 
 
 def main():
