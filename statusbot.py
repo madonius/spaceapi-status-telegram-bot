@@ -2,7 +2,7 @@ import json
 import telegram
 import requests
 import logging
-# TODO: Check datetime for updates
+import datetime
 
 from telegram.error import NetworkError, Unauthorized
 from time import sleep
@@ -15,6 +15,21 @@ BOT_USERNAME = configuration['username']
 SPACEAPI_URL = 'http://club.entropia.de/spaceapi'
 
 update_id = None
+
+
+class EntropiaStatus(object):
+    def __init__(self):
+        self.spaceapi_url = SPACEAPI_URL
+        self.spaceapi = self.entropia_spaceapi()
+        self.open = self.is_club_open()
+
+    def entropia_spaceapi(self):
+        spaceapi = requests.get(self.spaceapi_url)
+        return spaceapi.json()
+
+    def is_club_open(self):
+        return self.spaceapi['open']
+
 
 def main():
     global update_id
@@ -34,17 +49,13 @@ def main():
             update_id += 1
 
 
-def is_club_open():
-    spaceapi = requests.get(SPACEAPI_URL)
-    return spaceapi.json()['open']
-
-
 def report_status(bot):
     global update_id
+    clubstatus = EntropiaStatus()
     for update in bot.get_updates(offset=update_id, timeout=10):
         update_id += 1
         if update.message and update.message.text == 'status':
-            if is_club_open():
+            if clubstatus.open:
                 update.message.reply_text('Der Club ist offen')
             else:
                 update.message.reply_text('Der Club ist zu')
