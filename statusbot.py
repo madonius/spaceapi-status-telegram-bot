@@ -20,18 +20,18 @@ update_id = None
 class EntropiaStatus(object):
     def __init__(self):
         self.spaceapi_url = SPACEAPI_URL
-        self.spaceapi = self.entropia_spaceapi()
-        self.open = self.is_club_open()
-        self.last_change = self.last_change()
+        self.spaceapi = self.__entropia_spaceapi__()
+        self.open = self.__is_club_open__()
+        self.last_change = self.__get_last_change__()
 
-    def entropia_spaceapi(self):
+    def __entropia_spaceapi__(self):
         spaceapi = requests.get(self.spaceapi_url)
         return spaceapi.json()
 
-    def is_club_open(self):
+    def __is_club_open__(self):
         return self.spaceapi['open']
 
-    def last_change(self):
+    def __get_last_change__(self):
         last_change = self.spaceapi['state']['lastchange']
         return datetime.datetime.fromtimestamp(last_change)
 
