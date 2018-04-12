@@ -49,6 +49,17 @@ class EntropiaStatus(object):
         return seconds_since_change < 10.0
 
 
+class ClubStatusBot(telegram.Bot):
+    def __init__(self, token):
+        telegram.Bot.__init__(self, token=token)
+
+    def get_update_id(self):
+        try:
+            return self.get_updates()[0].update_id
+        except IndexError:
+            return None
+
+
 def main():
     global update_id
     bot = telegram.Bot(API_TOKEN)
