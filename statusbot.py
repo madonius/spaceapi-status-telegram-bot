@@ -19,7 +19,7 @@ SPACEAPI_URL = 'http://club.entropia.de/spaceapi'
 update_id = None
 
 
-class EntropiaStatus(object):
+class SpaceApiStatus(object):
     def __init__(self):
         self._spaceapi_url = SPACEAPI_URL
         self._spaceapi = self.spaceapi
@@ -80,7 +80,6 @@ def main():
 
 def report_status(bot):
     global update_id
-    clubstatus = EntropiaStatus()
     for update in bot.get_updates(offset=update_id, timeout=10):
         update_id += 1
         if update.message and update.message.text == 'status':
@@ -88,6 +87,7 @@ def report_status(bot):
                 update.message.reply_text('Der Club ist offen')
             else:
                 update.message.reply_text('Der Club ist zu')
+    clubstatus = SpaceApiStatus(spaceapi_url=SPACEAPI_URL)
 
 
 if __name__ == '__main__':
