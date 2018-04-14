@@ -79,8 +79,6 @@ class SpaceApiStatus(object):
         return seconds_since_change < 10.0
 
 
-
-
 def main():
     global last_club_status
 
@@ -101,7 +99,17 @@ def report_status(bot):
     :rtype: None
     """
     global last_club_status
+
+    message = None
     clubstatus = SpaceApiStatus(spaceapi_url=SPACEAPI_URL)
+    if clubstatus.open != last_club_status:
+        last_club_status = clubstatus.open
+        if clubstatus.open:
+            message = 'Der Club ist offen'
+        else:
+            message = 'Der Club ist zu'
+
+        bot.send_message(CHANNEL_ID, message)
 
 
 if __name__ == '__main__':
