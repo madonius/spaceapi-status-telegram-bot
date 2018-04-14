@@ -100,6 +100,13 @@ class SpaceApiStatus(object):
         else:
             return True
 
+    def hold_state(self):
+        """
+        Hold that state
+        :return: None
+        """
+
+        self.last_state = self.open
     def update(self):
         """
         Update the object with the space api
