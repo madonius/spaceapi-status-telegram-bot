@@ -66,7 +66,7 @@ class SpaceApiStatus(object):
         return datetime.datetime.fromtimestamp(last_change)
 
     @property
-    def changed(self, timestamp=None):
+    def changed_since(self, timestamp=None):
         """
         Check if the status has changed
         :param timestamp: The timestamp since when the last check
