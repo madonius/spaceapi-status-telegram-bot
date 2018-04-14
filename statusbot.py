@@ -29,7 +29,7 @@ class SpaceApiStatus(object):
         :param spaceapi_url: the URL where the spaceapi JSON is located
         :type spaceapi_url str
         """
-        self._last_state = last_state
+        self.last_state = last_state
         self._spaceapi_url = spaceapi_url
         self._spaceapi = None
         self._open = None
@@ -89,8 +89,8 @@ class SpaceApiStatus(object):
         :rtype: bool
         """
         self.update()
-        if type(self._last_state) == bool:
-            last_state = self._last_state
+        if type(self.last_state) == bool:
+            last_state = self.last_state
 
         if not type(last_state) == bool:
             return True
