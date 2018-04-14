@@ -17,6 +17,7 @@ BOT_USERNAME = configuration['username']
 CHANNEL_ID = configuration['telegram_channel_id']
 SPACEAPI_URL = 'http://club.entropia.de/spaceapi'
 
+last_club_status = None
 
 
 class SpaceApiStatus(object):
@@ -52,6 +53,7 @@ class SpaceApiStatus(object):
 
 
 def main():
+    global last_club_status
 
     while True:
         try:
@@ -63,6 +65,7 @@ def main():
 
 
 def report_status(bot):
+    global last_club_status
     clubstatus = SpaceApiStatus(spaceapi_url=SPACEAPI_URL)
 
 
