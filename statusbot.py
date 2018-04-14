@@ -1,4 +1,15 @@
 #!/usr/bin/env python3
+"""
+A script that executes a telegram Bot that notifies users in a chat/channel of a status change in the hackerspace
+"""
+__author__ = "Emmanouil 'madonius' Kampitakis"
+__copyright__ = "Copyright 2018"
+__credits__ = ["Emmanouil Kampitakis"]
+__license__ = "MIT"
+__version__ = "0.1-beta"
+__maintainer__ = "Emmanouil Kampitakis"
+__email__ = "info+git@kampitakis.de"
+__status__ = "Beta"
 
 import json
 import telegram
