@@ -21,7 +21,14 @@ last_club_status = None
 
 
 class SpaceApiStatus(object):
+    """
+    An object collecting the entropia status from the spaceapi
+    """
     def __init__(self, spaceapi_url=None):
+        """
+        :param spaceapi_url: the URL where the spaceapi JSON is located
+        :type spaceapi_url str
+        """
         self._spaceapi_url = spaceapi_url
         self._spaceapi = self.spaceapi
         self._open = self.open
@@ -29,20 +36,42 @@ class SpaceApiStatus(object):
 
     @property
     def spaceapi(self):
+        """
+        Retrieve the api's contents
+        :return: the api's contents
+        :rtype: dict
+        """
         spaceapi = requests.get(self._spaceapi_url)
         return spaceapi.json()
 
     @property
     def open(self):
+        """
+        The space's status
+        :return: the spaces's status
+        :rtype: bool
+        """
         return self._spaceapi['open']
 
     @property
     def last_change(self):
+        """
+        The status's last change timestamp
+        :return: Date of the last statuschange
+        :rtype: datetime.datetime
+        """
         last_change = self._spaceapi['state']['lastchange']
         return datetime.datetime.fromtimestamp(last_change)
 
     @property
     def changed(self, timestamp=None):
+        """
+        Check if the status has changed
+        :param timestamp: The timestamp since when the last check
+        :type timestamp: datetime.datetime
+        :return: whethes the status has changed since the timestamp
+        :rtype: bool
+        """
         # TODO: Status change detection should be done properly…
         if not timestamp:
             timestamp = datetime.datetime.now()
@@ -65,6 +94,13 @@ def main():
 
 
 def report_status(bot):
+    """
+    Report the spaceapi state to the Telegram channel
+    :param bot: Telegram Bot connection
+    :type bot: telegram.Bot
+    :return: None
+    :rtype: None
+    """
     global last_club_status
     clubstatus = SpaceApiStatus(spaceapi_url=SPACEAPI_URL)
 
