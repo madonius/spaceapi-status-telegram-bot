@@ -20,8 +20,8 @@ update_id = None
 
 
 class SpaceApiStatus(object):
-    def __init__(self):
-        self._spaceapi_url = SPACEAPI_URL
+    def __init__(self, spaceapi_url=None):
+        self._spaceapi_url = spaceapi_url
         self._spaceapi = self.spaceapi
         self._open = self.open
         self._last_change = self.last_change
