@@ -30,9 +30,10 @@ class SpaceApiStatus(object):
         :type spaceapi_url str
         """
         self._spaceapi_url = spaceapi_url
-        self._spaceapi = self.spaceapi
-        self._open = self.open
-        self._last_change = self.last_change
+        self._spaceapi = None
+        self._open = None
+        self._last_change = None
+        self.update()
 
     @property
     def spaceapi(self):
@@ -78,6 +79,15 @@ class SpaceApiStatus(object):
         seconds_since_change = (timestamp - self._last_change).total_seconds()
         return seconds_since_change < 10.0
 
+
+    def update(self):
+        """
+        Update the object with the space api
+        :return: None
+        """
+        self._spaceapi = self.spaceapi
+        self._open = self.open
+        self._last_change = self.last_change
 
 def main():
     global last_club_status
