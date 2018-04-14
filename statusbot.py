@@ -89,8 +89,6 @@ def main():
             report_status(bot)
         except NetworkError:
             sleep(1)
-        except Unauthorized:
-            update_id += 1
 
 
 def report_status(bot):
