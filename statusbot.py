@@ -10,7 +10,7 @@ from telegram.error import NetworkError, Unauthorized
 from time import sleep
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-configuration = json.load(open('notizen.json'))
+configuration = json.load(open('config.json'))
 API_TOKEN = configuration['api_token']
 BOT_NAME = configuration['name']
 BOT_USERNAME = configuration['username']
