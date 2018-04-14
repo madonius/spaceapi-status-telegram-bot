@@ -137,18 +137,18 @@ def report_status(bot, clubstatus):
     """
 
     message = "The space has been "
-    clubstatus = SpaceApiStatus(spaceapi_url=SPACEAPI_URL)
-    if clubstatus.open != last_club_status:
-        if not last_club_status:
+
+    if clubstatus.changed_from():
+        if not clubstatus.last_state:
             bot.send_message(CHANNEL_ID, "Good day! I was just started.\nReady to report!\n:-)")
 
-        last_club_status = clubstatus.open
         if clubstatus.open:
             message += "opened"
         else:
             message += "closed"
 
         bot.send_message(CHANNEL_ID, message)
+        clubstatus.hold_state()
 
 
 if __name__ == '__main__':
