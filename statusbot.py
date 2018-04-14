@@ -15,7 +15,7 @@ API_TOKEN = configuration['api_token']
 BOT_NAME = configuration['name']
 BOT_USERNAME = configuration['username']
 CHANNEL_ID = configuration['telegram_channel_id']
-SPACEAPI_URL = 'http://club.entropia.de/spaceapi'
+SPACEAPI_URL = configuration['spaceapi_url']
 
 
 class SpaceApiStatus(object):
