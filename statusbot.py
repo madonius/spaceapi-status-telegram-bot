@@ -24,11 +24,12 @@ class SpaceApiStatus(object):
     """
     An object collecting the entropia status from the spaceapi
     """
-    def __init__(self, spaceapi_url=None):
+    def __init__(self, spaceapi_url=None, last_state=None):
         """
         :param spaceapi_url: the URL where the spaceapi JSON is located
         :type spaceapi_url str
         """
+        self._last_state = last_state
         self._spaceapi_url = spaceapi_url
         self._spaceapi = None
         self._open = None
@@ -79,6 +80,25 @@ class SpaceApiStatus(object):
         seconds_since_change = (timestamp - self._last_change).total_seconds()
         return seconds_since_change < 10.0
 
+    def changed_from(self, last_state=None):
+        """
+        Check if the last state is the current one
+        :param last_state: the last state of the space
+        :type last_state: bool
+        :return: Whether the state has chenged
+        :rtype: bool
+        """
+        self.update()
+        if type(self._last_state) == bool:
+            last_state = self._last_state
+
+        if not type(last_state) == bool:
+            return True
+
+        if last_state == self.open:
+            return False
+        else:
+            return True
 
     def update(self):
         """
