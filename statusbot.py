@@ -109,6 +109,7 @@ class SpaceApiStatus(object):
         self._open = self.open
         self._last_change = self.last_change
 
+
 def main():
     global last_club_status
 
@@ -130,7 +131,7 @@ def report_status(bot):
     """
     global last_club_status
 
-    message = "The Club has been "
+    message = "The space has been "
     clubstatus = SpaceApiStatus(spaceapi_url=SPACEAPI_URL)
     if clubstatus.open != last_club_status:
         if not last_club_status:
