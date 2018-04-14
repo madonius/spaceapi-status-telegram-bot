@@ -105,6 +105,7 @@ class SpaceApiStatus(object):
         """
 
         self.last_state = self.open
+
     def update(self):
         """
         Update the object with the space api
