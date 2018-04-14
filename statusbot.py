@@ -118,9 +118,10 @@ class SpaceApiStatus(object):
 def main():
 
     bot = telegram.Bot(API_TOKEN)
+    clubstatus = SpaceApiStatus(spaceapi_url=SPACEAPI_URL)
     while True:
         try:
-            report_status(bot)
+            report_status(bot, clubstatus)
         except NetworkError:
             sleep(1)
 
