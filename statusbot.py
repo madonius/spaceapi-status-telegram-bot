@@ -84,6 +84,7 @@ class SpaceApiStatus(object):
 def main():
     global last_club_status
 
+    bot = telegram.Bot(API_TOKEN)
     while True:
         try:
             report_status(bot)
