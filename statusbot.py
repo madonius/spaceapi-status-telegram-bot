@@ -17,8 +17,6 @@ BOT_USERNAME = configuration['username']
 CHANNEL_ID = configuration['telegram_channel_id']
 SPACEAPI_URL = 'http://club.entropia.de/spaceapi'
 
-last_club_status = None
-
 
 class SpaceApiStatus(object):
     """
@@ -118,7 +116,6 @@ class SpaceApiStatus(object):
 
 
 def main():
-    global last_club_status
 
     bot = telegram.Bot(API_TOKEN)
     while True:
@@ -136,7 +133,6 @@ def report_status(bot):
     :return: None
     :rtype: None
     """
-    global last_club_status
 
     message = "The space has been "
     clubstatus = SpaceApiStatus(spaceapi_url=SPACEAPI_URL)
