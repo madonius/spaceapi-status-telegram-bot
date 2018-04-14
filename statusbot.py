@@ -125,11 +125,13 @@ def main():
             sleep(1)
 
 
-def report_status(bot):
+def report_status(bot, clubstatus):
     """
     Report the spaceapi state to the Telegram channel
     :param bot: Telegram Bot connection
     :type bot: telegram.Bot
+    :param clubstatus: SpaceApi instance
+    :type clubstatus: SpaceApiStatus
     :return: None
     :rtype: None
     """
