@@ -17,7 +17,6 @@ BOT_USERNAME = configuration['username']
 CHANNEL_ID = configuration['telegram_channel_id']
 SPACEAPI_URL = 'http://club.entropia.de/spaceapi'
 
-update_id = None
 
 
 class SpaceApiStatus(object):
@@ -50,25 +49,9 @@ class SpaceApiStatus(object):
         return seconds_since_change < 10.0
 
 
-class ClubStatusBot(telegram.Bot):
-    def __init__(self, token):
-        telegram.Bot.__init__(self, token=token)
-
-    def get_update_id(self):
-        try:
-            return self.get_updates()[0].update_id
-        except IndexError:
-            return None
 
 
 def main():
-    global update_id
-    bot = telegram.Bot(API_TOKEN)
-
-    try:
-        update_id = bot.get_updates()[0].update_id
-    except IndexError:
-        update_id = None
 
     while True:
         try:
@@ -80,14 +63,6 @@ def main():
 
 
 def report_status(bot):
-    global update_id
-    for update in bot.get_updates(offset=update_id, timeout=10):
-        update_id += 1
-        if update.message and update.message.text == 'status':
-            if clubstatus.open:
-                update.message.reply_text('Der Club ist offen')
-            else:
-                update.message.reply_text('Der Club ist zu')
     clubstatus = SpaceApiStatus(spaceapi_url=SPACEAPI_URL)
 
 
