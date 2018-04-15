@@ -17,6 +17,7 @@ You will need a channel ID
 1. Install the dependencies:
    ```bash
    pip3 install python-telegram-bot requests
+   ```
 1. Run the script:
    ```bash
    ./statusbot.py
