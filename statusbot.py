@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 A script that executes a telegram Bot that notifies users in a chat/channel of a status change in the hackerspace
 """
@@ -16,12 +17,15 @@ import telegram
 import requests
 import logging
 import datetime
+import random
 
 from telegram.error import NetworkError, Unauthorized
 from time import sleep
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-configuration = json.load(open('config.json'))
+configuration    = json.load(open('config.json'))
+open_messages    = configuration.get("open_messages")
+cloesed_messages = configuration.get("closed_messages")
 API_TOKEN = configuration['api_token']
 BOT_NAME = configuration['name']
 BOT_USERNAME = configuration['username']
@@ -83,7 +87,7 @@ class SpaceApiStatus(object):
         :return: whethes the status has changed since the timestamp
         :rtype: bool
         """
-        # TODO: Status change detection should be done properly…
+        # TODO: Status change detection should be done properly
         if not timestamp:
             timestamp = datetime.datetime.now()
         seconds_since_change = (timestamp - self._last_change).total_seconds()
@@ -149,16 +153,14 @@ def report_status(bot, clubstatus):
     :rtype: None
     """
 
-    message = "The space has been "
-
     if clubstatus.changed_from():
         if not clubstatus.last_state:
             bot.send_message(CHANNEL_ID, "Good day! I was just started.\nReady to report!\n:-)")
 
         if clubstatus.open:
-            message += "opened"
+            message = random.choice(open_messages)
         else:
-            message += "closed"
+            message = random.choice(closed_messages)
 
         bot.send_message(CHANNEL_ID, message)
         clubstatus.hold_state()

@@ -3,5 +3,11 @@
   "username": "botty_mcbotface",
   "api_token": "1234567:suchtoken_verysecret",
   "spaceapi_url": "https://youtu.be/oavMtUWDBTM",
-  "telegram_channel_id": -10111213141516
+  "telegram_channel_id": -10111213141516,
+  "open_messages": [
+    "The space is now open!"  
+  ],
+  "closed_messages": [
+    "The space is now closed!"
+  ]
 }
