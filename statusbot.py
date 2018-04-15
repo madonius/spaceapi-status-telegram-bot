@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 A script that executes a telegram Bot that notifies users in a chat/channel of a status change in the hackerspace
 """
