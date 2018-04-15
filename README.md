@@ -13,7 +13,10 @@ You will need a channel ID
    ```bash
    cp config.json.example config.json
    ```
-1. Replace the dummy entries in the fiels with their respective entry
+1. Replace the dummy entries in the files with their respective entry
+1. Install the dependencies:
+   ```bash
+   pip3 install python-telegram-bot requests
 1. Run the script:
    ```bash
    ./statusbot.py
