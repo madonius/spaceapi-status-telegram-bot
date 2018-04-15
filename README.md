@@ -15,7 +15,7 @@ You will need a channel ID
    ```
 1. Replace the dummy entries in the files with their respective entry
 1. Install the dependencies:
-      bash
+   ```bash
    pip3 install python-telegram-bot requests
 1. Run the script:
    ```bash
